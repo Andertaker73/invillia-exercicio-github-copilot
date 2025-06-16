@@ -28,12 +28,15 @@ document.addEventListener("DOMContentLoaded", () => {
             <ul>
               ${details.participants
                 .map(
-                  email => `
-                    <li>
-                      <span class="participant-avatar">${email[0]}</span>
-                      ${email}
-                    </li>
-                  `
+                  email => {
+                    const li = document.createElement("li");
+                    const avatar = document.createElement("span");
+                    avatar.className = "participant-avatar";
+                    avatar.textContent = email[0];
+                    li.appendChild(avatar);
+                    li.appendChild(document.createTextNode(" " + email));
+                    return li.outerHTML;
+                  }
                 )
                 .join("")}
             </ul>
